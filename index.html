@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transports Baudry — Transport routier de fret dans le Hainaut</title>
+<meta name="description" content="Transports Baudry, transporteur en vrac à Pipaix depuis 2002 — gravier, sable, engrais, matériaux de chantier. Pour professionnels et particuliers. Devis gratuit sous 24h.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0D;
+    --ink-2:#15171C;
+    --ink-3:#1F222A;
+    --paper:#EDEEEA;
+    --white:#FFFFFF;
+    --amber:#FF5B1F;
+    --amber-dim:#CC4715;
+    --stripe:#FFC53D;
+    --steel:#9096A3;
+    --slate:#585F6B;
+    --line-dark:rgba(255,255,255,0.12);
+    --line-light:rgba(10,11,13,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--ink);
+    color:var(--white);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .display{font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline:3px solid var(--stripe);
+    outline-offset:2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ================= HEADER ================= */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,11,13,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-dark);
+    padding:16px 0;
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  .brand{display:flex; align-items:center; gap:11px;}
+  .brand-mark{
+    width:30px; height:30px; flex:none;
+    position:relative;
+    background:repeating-linear-gradient(45deg, var(--amber) 0 5px, var(--ink) 5px 10px);
+    border-radius:3px;
+  }
+  .brand-name{font-family:'Big Shoulders Display'; font-weight:700; font-size:19px; letter-spacing:0.02em; text-transform:uppercase;}
+  .header-right{display:flex; align-items:center; gap:22px;}
+  .header-contact{
+    font-family:'JetBrains Mono'; font-size:12.5px; color:var(--steel); text-align:right;
+    display:none;
+  }
+  .header-contact a:hover{color:var(--amber);}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--amber); color:var(--ink);
+    font-family:'Big Shoulders Display'; font-weight:700; text-transform:uppercase; letter-spacing:0.02em;
+    font-size:15px;
+    padding:13px 24px;
+    border:none; border-radius:2px;
+    text-decoration:none; cursor:pointer;
+    transition:background 0.15s ease, transform 0.15s ease;
+  }
+  .btn:hover{background:var(--stripe); transform:translateY(-1px);}
+  .btn-arrow{transition:transform 0.15s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+  .btn-sm{padding:10px 18px; font-size:13px;}
+  @media (min-width:760px){ .header-contact{display:block;} }
+
+  /* ================= HERO ================= */
+  .hero{
+    min-height:88vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:64px 0 0;
+    position:relative;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 900px 500px at 85% 10%, rgba(255,91,31,0.14), transparent 70%);
+    pointer-events:none;
+  }
+  .kicker{
+    font-family:'JetBrains Mono'; font-size:12.5px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--amber);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:26px;
+    opacity:0; animation:fadeIn 0.5s ease 0.1s forwards;
+  }
+  .kicker::before{content:""; width:26px; height:1px; background:var(--amber);}
+  .headline{
+    font-size:clamp(40px, 8vw, 108px);
+    font-weight:800;
+    line-height:0.94;
+    letter-spacing:-0.01em;
+  }
+  .headline .line{overflow:hidden; display:block;}
+  .headline .line span{
+    display:block;
+    transform:translateY(105%);
+    animation:lineUp 0.8s cubic-bezier(.16,.84,.32,1) forwards;
+  }
+  .headline .line:nth-child(1) span{animation-delay:0.15s;}
+  .headline .line:nth-child(2) span{animation-delay:0.28s; color:var(--amber);}
+  .headline .line:nth-child(3) span{animation-delay:0.41s;}
+  @keyframes lineUp{to{transform:translateY(0);}}
+  @keyframes fadeIn{to{opacity:1;}}
+
+  .hero-sub{
+    margin-top:28px;
+    font-size:17px; color:var(--steel);
+    max-width:46ch;
+    opacity:0; animation:fadeIn 0.6s ease 0.6s forwards;
+  }
+  .hero-actions{
+    margin-top:34px;
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    opacity:0; animation:fadeIn 0.6s ease 0.72s forwards;
+  }
+  .hero-actions .ghost{
+    font-family:'JetBrains Mono'; font-size:13px; color:var(--steel);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .hero-actions .ghost:hover{color:var(--white);}
+
+  /* Departure-board ticker */
+  .ticker{
+    margin-top:72px;
+    border-top:1px solid var(--line-dark);
+    border-bottom:1px solid var(--line-dark);
+    background:var(--ink-2);
+    overflow:hidden;
+    padding:14px 0;
+  }
+  .ticker-track{
+    display:flex; gap:40px; white-space:nowrap;
+    width:max-content;
+    animation:scrollTicker 26s linear infinite;
+  }
+  @keyframes scrollTicker{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .ticker-item{
+    font-family:'JetBrains Mono'; font-size:13px; letter-spacing:0.05em;
+    color:var(--steel); display:flex; align-items:center; gap:14px;
+  }
+  .ticker-item b{color:var(--stripe); font-weight:600;}
+  .ticker-sep{color:var(--amber);}
+
+  /* ================= HAZARD DIVIDER (signature) ================= */
+  .hazard{
+    height:22px;
+    background:repeating-linear-gradient(-45deg, var(--amber) 0 26px, var(--ink) 26px 52px);
+  }
+
+  /* ================= STATS ================= */
+  .stats{
+    background:var(--paper);
+    color:var(--ink);
+    padding:64px 0;
+  }
+  .stats .wrap{
+    display:grid; grid-template-columns:repeat(3,1fr);
+  }
+  .stat{
+    padding:0 28px;
+    border-left:1px solid var(--line-light);
+  }
+  .stat:first-child{border-left:none; padding-left:0;}
+  .stat-num{font-family:'Big Shoulders Display'; font-weight:800; font-size:clamp(48px,6vw,84px); line-height:0.9; color:var(--ink);}
+  .stat-num .unit{font-size:0.36em; color:var(--amber-dim); margin-left:4px;}
+  .stat-label{font-size:14px; color:var(--slate); margin-top:10px; max-width:22ch;}
+
+  /* ================= SECTION shared ================= */
+  section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-kicker{
+    font-family:'JetBrains Mono'; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:12px;
+  }
+  .section-head h2{
+    font-family:'Big Shoulders Display'; font-weight:700; text-transform:uppercase;
+    font-size:clamp(28px,4vw,44px); line-height:1;
+  }
+  .section-sub{color:var(--steel); margin-top:16px; font-size:15.5px; max-width:52ch;}
+
+  /* ================= SERVICES (asymmetric) ================= */
+  .services{background:var(--ink);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    grid-template-rows:auto auto;
+    gap:20px;
+  }
+  .service-card{
+    background:var(--ink-2);
+    border:1px solid var(--line-dark);
+    padding:34px;
+    border-radius:3px;
+    position:relative;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .service-card:hover{border-color:var(--amber); transform:translateY(-3px);}
+  .service-card.lead{grid-row:1/3;}
+  .service-index{
+    font-family:'JetBrains Mono'; font-size:13px; color:var(--amber); margin-bottom:20px;
+  }
+  .service-card h3{
+    font-family:'Big Shoulders Display'; font-weight:700; text-transform:uppercase;
+    font-size:26px; margin-bottom:14px;
+  }
+  .service-card.lead h3{font-size:34px;}
+  .service-card p{color:var(--steel); font-size:15px; max-width:38ch;}
+  @media (max-width:820px){
+    .service-grid{grid-template-columns:1fr; grid-template-rows:none;}
+    .service-card.lead{grid-row:auto;}
+  }
+
+  /* ================= ZONE / TRUST ================= */
+  .zone{background:var(--ink-2);}
+  .zone .wrap{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;}
+  .zone-list{list-style:none; margin-top:24px;}
+  .zone-list li{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:15px 0; border-bottom:1px solid var(--line-dark); font-size:16px;
+  }
+  .zone-list li:first-child{border-top:1px solid var(--line-dark);}
+  .zone-list .place{display:flex; align-items:center; gap:12px;}
+  .zone-list .dot{width:6px; height:6px; background:var(--amber); border-radius:50%; flex:none;}
+  .zone-list .dist{font-family:'JetBrains Mono'; font-size:12.5px; color:var(--steel);}
+  .trust-copy p{color:var(--steel); font-size:15.5px; margin-bottom:16px; max-width:44ch;}
+  .trust-copy p:last-child{margin-bottom:0;}
+  .trust-copy strong{color:var(--white);}
+
+  /* ================= PROCESS ================= */
+  .process{background:var(--ink);}
+  .process-row{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .process-step{
+    border-top:2px solid var(--amber);
+    padding-top:22px;
+  }
+  .process-step .num{
+    font-family:'Big Shoulders Display'; font-weight:800; font-size:52px; color:var(--amber);
+    line-height:1; margin-bottom:14px;
+  }
+  .process-step h3{font-size:18px; font-weight:600; margin-bottom:8px;}
+  .process-step p{color:var(--steel); font-size:14.5px; max-width:32ch;}
+  @media (max-width:760px){ .process-row{grid-template-columns:1fr;} }
+
+  /* ================= QUOTE — dispatch board ================= */
+  .quote{background:var(--paper); color:var(--ink);}
+  .quote .wrap{display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:start;}
+  .quote-intro h2{
+    font-family:'Big Shoulders Display'; font-weight:700; text-transform:uppercase;
+    font-size:clamp(30px,4vw,46px); line-height:1; color:var(--ink);
+  }
+  .quote-intro p{color:var(--slate); margin-top:18px; font-size:15.5px; max-width:40ch;}
+  .quote-facts{margin-top:28px; display:flex; flex-direction:column; gap:10px;}
+  .quote-fact{display:flex; align-items:center; gap:10px; font-size:14px; color:var(--slate);}
+  .quote-fact .mark{color:var(--amber-dim); font-weight:700;}
+
+  .board{
+    background:var(--ink);
+    color:var(--white);
+    border-radius:4px;
+    position:relative;
+    box-shadow:0 30px 70px -24px rgba(0,0,0,0.5);
+  }
+  .board-tab{
+    position:absolute; top:0; left:26px; transform:translateY(-100%);
+    background:var(--amber); color:var(--ink);
+    font-family:'JetBrains Mono'; font-size:11px; letter-spacing:0.14em;
+    padding:7px 16px 9px; border-radius:4px 4px 0 0; font-weight:600;
+  }
+  .board-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:24px 26px 16px; border-bottom:1px dashed var(--line-dark);
+  }
+  .board-head h3{font-family:'Big Shoulders Display'; font-weight:700; font-size:19px; text-transform:uppercase;}
+  .board-head .ref{font-family:'JetBrains Mono'; font-size:11px; color:var(--steel);}
+  .board-body{padding:22px 26px 26px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+  .field{display:flex; flex-direction:column; gap:7px;}
+  .field.full{grid-column:1/-1;}
+  label{
+    font-family:'JetBrains Mono'; font-size:10.5px; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--steel);
+  }
+  input, select, textarea{
+    font-family:'Inter'; font-size:14.5px;
+    padding:11px 13px;
+    border:1px solid var(--line-dark);
+    border-radius:2px;
+    background:var(--ink-3);
+    color:var(--white);
+    width:100%;
+  }
+  input::placeholder, textarea::placeholder{color:#5a6070;}
+  textarea{resize:vertical; min-height:64px;}
+  input:focus, select:focus, textarea:focus{border-color:var(--amber);}
+  .board-submit{width:100%; margin-top:6px; justify-content:center; font-size:15px; padding:15px;}
+  .board-foot{
+    font-family:'JetBrains Mono'; font-size:11px; color:var(--steel); text-align:center; margin-top:12px;
+  }
+  .form-status{margin-top:10px; font-family:'JetBrains Mono'; font-size:12.5px; display:none;}
+  .form-status.ok{color:#4ADE80; display:block;}
+  .form-status.err{color:var(--amber); display:block;}
+
+  @media (max-width:820px){ .quote .wrap{grid-template-columns:1fr;} }
+
+  /* ================= FINAL CTA ================= */
+  .final-cta{
+    background:var(--ink); text-align:center;
+    border-top:1px solid var(--line-dark);
+  }
+  .final-cta h2{
+    font-family:'Big Shoulders Display'; font-weight:800; text-transform:uppercase;
+    font-size:clamp(30px,5vw,58px); line-height:0.98; max-width:20ch; margin:0 auto 18px;
+  }
+  .final-cta h2 span{color:var(--amber);}
+  .final-cta p{color:var(--steel); max-width:48ch; margin:0 auto 32px; font-size:16px;}
+
+  /* ================= FOOTER ================= */
+  footer{background:var(--ink-2); padding:44px 0 26px; font-size:13.5px; color:var(--steel);}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;}
+  .footer-brand{font-family:'Big Shoulders Display'; font-weight:700; font-size:18px; color:var(--white); text-transform:uppercase; margin-bottom:10px;}
+  .footer-meta{line-height:1.9;}
+  .footer-bottom{
+    margin-top:30px; padding-top:20px; border-top:1px solid var(--line-dark);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    font-size:12px; color:#4a505c;
+  }
+  .footer-bottom a{text-decoration:none; color:#5c6270;}
+  .footer-bottom a:hover{color:var(--amber);}
+
+  /* ================= Reveal ================= */
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:600px){
+    .stats .wrap{grid-template-columns:1fr; gap:28px;}
+    .stat{border-left:none; padding-left:0; border-top:1px solid var(--line-light); padding-top:24px;}
+    .stat:first-child{border-top:none; padding-top:0;}
+    .field-row{grid-template-columns:1fr;}
+    .zone .wrap{gap:44px;}
+    section{padding:60px 0;}
+    .hero{min-height:auto; padding:48px 0 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div class="brand-name">Transports Baudry</div>
+    </div>
+    <div class="header-right">
+      <div class="header-contact">
+        <a href="tel:+3269662303">+32 69 66 23 03</a>
+      </div>
+      <a href="#devis" class="btn btn-sm">Devis <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Transport en vrac par camions-bennes — Hainaut belge</div>
+    <h1 class="headline">
+      <span class="line"><span>Votre vrac.</span></span>
+      <span class="line"><span>Nos bennes.</span></span>
+      <span class="line"><span>Devis en 24h.</span></span>
+    </h1>
+    <p class="hero-sub">
+      Gravier, sable, engrais, matériaux de chantier : transport en vrac pour
+      professionnels et particuliers depuis Leuze-en-Hainaut, depuis 2002.
+    </p>
+    <div class="hero-actions">
+      <a href="#devis" class="btn">Demander un devis <span class="btn-arrow">→</span></a>
+      <a href="#zone" class="ghost">Voir nos zones d'intervention ↓</a>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-item"><b>LILLE</b><span class="ticker-sep">→</span>TOURNAI<span class="ticker-sep">→</span>LEUZE-EN-HAINAUT<span class="ticker-sep">→</span>MOUSCRON<span class="ticker-sep">→</span>LA LOUVIÈRE<span class="ticker-sep">→</span>PÉRUWELZ</div>
+      <div class="ticker-item"><b>LILLE</b><span class="ticker-sep">→</span>TOURNAI<span class="ticker-sep">→</span>LEUZE-EN-HAINAUT<span class="ticker-sep">→</span>MOUSCRON<span class="ticker-sep">→</span>LA LOUVIÈRE<span class="ticker-sep">→</span>PÉRUWELZ</div>
+    </div>
+  </div>
+</section>
+
+<div class="hazard" aria-hidden="true"></div>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stat reveal">
+      <div class="stat-num">24<span class="unit">ans</span></div>
+      <div class="stat-label">d'expérience dans le transport routier de fret, depuis 2002</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">5.0<span class="unit">/5</span></div>
+      <div class="stat-label">note moyenne des clients sur Google</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">2<span class="unit">publics</span></div>
+      <div class="stat-label">professionnels et particuliers, un service sur mesure pour chacun</div>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-kicker">Nos services</div>
+      <h2>Une flotte de bennes, deux métiers</h2>
+      <p class="section-sub">Le transport en vrac au quotidien, complété par la vente de matériel d'occasion.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card lead reveal">
+        <div class="service-index mono">01 — Notre cœur de métier</div>
+        <h3>Transport en vrac</h3>
+        <p>Gravier, sable, terre, engrais, matériaux de chantier : notre flotte de camions-bennes achemine vos matières en vrac, en toute sécurité et dans le respect des délais. Approvisionnement de chantiers et d'unités de production, livraison de produits agricoles, prise en charge de matières destinées à la valorisation.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-index mono">02</div>
+        <h3>Professionnels &amp; particuliers</h3>
+        <p>Que vous soyez une entreprise ou un particulier, nous adaptons le véhicule et le service à votre besoin.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-index mono">03</div>
+        <h3>Vente de matériel d'occasion</h3>
+        <p>Une offre de matériel d'occasion régulièrement mise à jour, avec des conseils clairs pour bien choisir. Contactez-nous pour connaître les disponibilités actuelles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone" id="zone">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-kicker">Zone d'intervention</div>
+      <h2 style="font-family:'Big Shoulders Display'; font-weight:700; text-transform:uppercase; font-size:clamp(24px,3vw,34px);">Basés à Pipaix, présents dans tout le Hainaut</h2>
+      <ul class="zone-list">
+        <li><span class="place"><span class="dot"></span>Leuze-en-Hainaut &amp; Pipaix</span><span class="dist mono">SIÈGE</span></li>
+        <li><span class="place"><span class="dot"></span>Tournai</span><span class="dist mono">~20 KM</span></li>
+        <li><span class="place"><span class="dot"></span>Mouscron</span><span class="dist mono">~30 KM</span></li>
+        <li><span class="place"><span class="dot"></span>La Louvière &amp; Péruwelz</span><span class="dist mono">RÉGION</span></li>
+        <li><span class="place"><span class="dot"></span>Lille &amp; MEL (France)</span><span class="dist mono">~40 KM</span></li>
+      </ul>
+    </div>
+    <div class="trust-copy reveal">
+      <div class="section-kicker">Pourquoi Transports Baudry</div>
+      <p><strong>Une entreprise familiale</strong>, fondée en 2002, avec des conducteurs qualifiés qui connaissent chaque route du Hainaut.</p>
+      <p>Professionnel ou particulier, vous êtes traité avec le même sérieux — pas de centre d'appels, pas d'intermédiaire.</p>
+      <p>Un service complété par la <strong>vente de matériel d'occasion</strong>, et une réputation bâtie sur le bouche-à-oreille : <strong>5,0 sur Google</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-kicker">Comment ça marche</div>
+      <h2>Un devis en trois étapes</h2>
+    </div>
+    <div class="process-row">
+      <div class="process-step reveal">
+        <div class="num mono">01</div>
+        <h3>Vous demandez</h3>
+        <p>Vous décrivez votre besoin via le formulaire ou par téléphone, en deux minutes.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="num mono">02</div>
+        <h3>On vous rappelle</h3>
+        <p>Un membre de l'équipe revient vers vous sous 24h ouvrées.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="num mono">03</div>
+        <h3>Devis gratuit</h3>
+        <p>Vous recevez une proposition claire, sans engagement de votre part.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote" id="devis">
+  <div class="wrap">
+    <div class="quote-intro reveal">
+      <h2>Un transport à organiser ?</h2>
+      <p>Décrivez votre besoin ci-contre. Nous revenons vers vous sous 24h avec un devis gratuit, sans engagement.</p>
+      <div class="quote-facts">
+        <div class="quote-fact"><span class="mark">→</span> Réponse sous 24h ouvrées</div>
+        <div class="quote-fact"><span class="mark">→</span> Devis gratuit, sans engagement</div>
+        <div class="quote-fact"><span class="mark">→</span> Aucune donnée transmise à des tiers</div>
+      </div>
+    </div>
+
+    <div class="board reveal">
+      <span class="board-tab">Demande de devis</span>
+      <div class="board-head">
+        <h3>Votre transport</h3>
+        <span class="ref mono">REF. TB-2026</span>
+      </div>
+      <form class="board-body" id="quoteForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="societe">Société</label>
+            <input type="text" id="societe" name="societe" placeholder="Nom de votre société" required>
+          </div>
+          <div class="field">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="+32 ..." required>
+          </div>
+          <div class="field">
+            <label for="frequence">Fréquence</label>
+            <select id="frequence" name="frequence">
+              <option value="ponctuel">Ponctuel</option>
+              <option value="regulier">Régulier</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field full">
+            <label for="marchandise">Type de matière</label>
+            <input type="text" id="marchandise" name="marchandise" placeholder="Ex. gravier, sable, terre, engrais...">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Trajet, volume, délai souhaité..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn board-submit">Envoyer la demande</button>
+        <div class="form-status" id="formStatus" role="status"></div>
+        <div class="board-foot">Ou appelez le +32 69 66 23 03</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap reveal">
+    <h2>Ne perdez plus <span>un seul</span> contrat faute de visibilité.</h2>
+    <p>Un devis gratuit, une réponse sous 24h, et une équipe qui connaît vos routes depuis 2002.</p>
+    <a href="#devis" class="btn">Demander un devis <span class="btn-arrow">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Transports Baudry</div>
+        <div class="footer-meta">
+          Rue du Haut Donjon 27, 7904 Pipaix (Leuze-en-Hainaut)<br>
+          +32 69 66 23 03<br>
+          transports.baudry@skynet.be
+        </div>
+      </div>
+      <div class="footer-meta">
+        Transports Baudry Jean-Pierre SA<br>
+        TVA BE0476405503
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Transports Baudry</span>
+      <span>Site réalisé par DDEx — <a href="https://ericlegueret.com" target="_blank" rel="noopener">ericlegueret.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  const form = document.getElementById('quoteForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    status.className = 'form-status';
+    status.textContent = 'Envoi en cours...';
+    status.style.display = 'block';
+    const data = Object.fromEntries(new FormData(form).entries());
+    try{
+      const res = await fetch('/api/contact', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
+      if(!res.ok) throw new Error('Erreur serveur');
+      status.className = 'form-status ok';
+      status.textContent = 'Demande envoyée — nous revenons vers vous sous 24h.';
+      form.reset();
+    }catch(err){
+      status.className = 'form-status err';
+      status.textContent = "Une erreur est survenue. Merci de nous contacter par téléphone.";
+    }
+  });
+</script>
+
+</body>
+</html>
